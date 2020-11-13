@@ -627,7 +627,7 @@ def sub_lists(my_list, depth):
 
 def setup_first_directory(base_dir):
   nr_init = question('How many initial conditions do you want to set up? ',int,[10])[0]
-  os.system('python2 $SHARC_GYM/wigner.py -n %i  init.molden' % nr_init)
+  os.system('python2 $SHARC_GYM/mod_wigner.py -n %i  init.molden' % nr_init)
   os.system('$SHARC_GYM/mod_setup_init.py --sharc_gym')  
   key_dir = os.getcwd()
 
@@ -717,7 +717,7 @@ def setup_dynamics(ref_hamiltonian, freq, final_modes, final_states, parameters,
                 all_run.write('#/bin/bash\n\n')
               first_dir = False
             else:
-              os.system('python2 $SHARC_GYM/wigner.py -n %i  init.molden' % nr_init)
+              os.system('python2 $SHARC_GYM/mod_wigner.py -n %i  init.molden' % nr_init)
               os.system('$SHARC_GYM/mod_setup_init.py --sharc_gym < %s/KEYSTROKES.setup_init_gym' % key_dir)  
             current_dir = os.getcwd()
             if diabat:

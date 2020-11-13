@@ -8,7 +8,7 @@ The first line of the LVC.template file contains the path to the V0.txt file.
 Change this path to the current location of the V0.txt file
 
 start the interactive SHARC_GYM script
-python2.7 $SHARC_GYM/SHARC_GYM.py
+python2.7 $SHARC_GYM/SHARC_gym.py
 
 set up a Hamiltonian loop. THe sharc_gym.in file asks for the generation of all 
 possible combinations where 0 or 1 modes and 0 to 2 states have been removed 
@@ -33,8 +33,9 @@ or
 sh gym_all_qsub_init.sh
 
 After all these calculations have finished, execute
-python2.7 $SHARC_GYM/SHARC_GYM_setup_trajs.py
+python2.7 $SHARC_GYM/SHARC_gym_setup_trajs.py
 and use an excitation window ranging from 0.0 to 5.0 eV.
+Remember that for testing purposes, the maximum simulation time can be reduced down to even 100fs.
 Run all trajectories by either using
 sh gym_all_run_traj.sh
 or

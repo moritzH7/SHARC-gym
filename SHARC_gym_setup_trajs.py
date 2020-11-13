@@ -176,10 +176,15 @@ def run_excite(setup_input):
 
 
   directories = [ line for line in setup_input ]      
-  if os.getcwd().split('/')[-1] == 'hamiltonian_loop':
+#  if os.getcwd().split('/')[-1] == 'hamiltonian_loop':
+#    current_loop = 1
+#  elif os.getcwd().split('/')[-1] == 'parameter_loop':
+#    current_loop = 2
+  print directories[0].split('/')
+  if directories[0].split('/')[-2] == 'hamiltonian_loop':
     current_loop = 1
-  elif os.getcwd().split('/')[-1] == 'parameter_loop':
-    current_loop = 2
+  elif directories[0].split('/')[-2] == 'parameter_loop':
+    current_loop = 2  
 #    directories.insert(0, os.getcwd() ) #make sure that the first directory is the base dir    
 
   #print 'directories', directories
