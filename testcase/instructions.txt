@@ -1,0 +1,70 @@
+This simple example shows the usage of the SHARC-GYM on the example of a model
+Hamiltonian of SO2. 
+
+First, set the SHARC_GYM variable pointing to the python scripts
+export SHARC_GYM=/pathtoscripts
+
+The first line of the LVC.template file contains the path to the V0.txt file. 
+Change this path to the current location of the V0.txt file
+
+start the interactive SHARC_GYM script
+python2.7 $SHARC_GYM/SHARC_GYM.py
+
+set up a Hamiltonian loop. THe sharc_gym.in file asks for the generation of all 
+possible combinations where 0 or 1 modes and 0 to 2 states have been removed 
+from the template file.
+Most options asked for by the script are related to the surface hopping dynamics and can be found in the SHARC documentation.
+For this example, just use the default options. 
+It is recommended to use not more than 10 initial conditions and a maximum simulation time of 100 fs.
+This way the example calculations will finish very fast.
+However, the results will be rather noisy and this is not recommended at all for production runs.
+
+The script automatically generates a folder "hamiltonian_loop" in which a directory is created for all combinations of modes and states. 
+The naming scheme used here is "mminus_AAAAsminusXX_YY_ZZ" where each A is the number of a vibrational mode that is ignored in the dynamics.
+Each X,Y,Z represents the index of the state in this multiplicity which is ignored in this calculation.
+
+Now enter the "Hamiltonian_loop" and run
+sh gym_all_run_first_init.sh
+to calculate a reference structure for all other initial conditions for each combination of modes and states.
+
+After this, all other initial conditions can be calculated either on a single machine or via submission to a queue
+sh gym_all_run_init.sh 
+or
+sh gym_all_qsub_init.sh
+
+After all these calculations have finished, execute
+python2.7 $SHARC_GYM/SHARC_GYM_setup_trajs.py
+and use an excitation window ranging from 0.0 to 5.0 eV.
+Run all trajectories by either using
+sh gym_all_run_traj.sh
+or
+sh gym_all_qsub_traj.sh
+
+The data can be extracted by running gym_extract_output_traj.sh
+Executing the analysis script, the deviation from the full-dimensional results can be calculated.
+For this, run SHARC_gym_analysis.py, select option 22 (diabatic Wigner) and use the population file that is created by the script "mminus_sminus0_0_0/pop.out" as a reference.
+
+Running the parameter loop is very similar to the hamiltonian loop.
+Again start with
+python2 SHARC_gym.py
+and select option two to set up a parameter loop.
+
+Enter the directory "parameter_loop" and run all intial conditions at once.
+The labels of the directories in the parameter_loop state which of the scannable parameters have been choosen.
+The order is: [Representation][coupling][hop-rescaling][reflection of frustrated hops][decoherence scheme][hopping probability]
+[T,F][2,3][1,2,3][1,2,3][1,2,3][1,2,3]
+
+now run the initial conditions using
+sh all_run_init.sh
+followed by 
+python2 $SHARC_GYM/SHARC_gym_setup_trajs.py
+now all the trajectories are again ready to be calculated using
+sh gym_all_run_traj.sh
+or
+sh gym_all_qsub_traj.sh
+after extraction of the data using sh gym_extract_output_traj.sh
+the data can again be analyzed using 
+python2 $SHARC_GYM/SHARC_gym_analysis.py
+
+
+
