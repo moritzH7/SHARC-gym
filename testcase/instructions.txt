@@ -8,7 +8,7 @@ The first line of the LVC.template file contains the path to the V0.txt file.
 Change this path to the current location of the V0.txt file
 
 start the interactive SHARC_GYM script
-python2.7 $SHARC_GYM/SHARC_GYM.py
+python2.7 $SHARC_GYM/SHARC_gym.py
 
 set up a Hamiltonian loop. THe sharc_gym.in file asks for the generation of all 
 possible combinations where 0 or 1 modes and 0 to 2 states have been removed 
