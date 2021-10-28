@@ -272,7 +272,7 @@ def read_input(input_file):
     if len(line.split())==0:
         continue
     key=line.lower().split()[0]
-    args=line.lower().split()[1:]
+    args=line.split()[1:]
     if key in sharc_gym_input:
         print 'Repeated keyword %s in line %i in input file! Check your input!' % (key,i+1)
         continue  # only first instance of key takes effect
@@ -338,6 +338,7 @@ def read_hamiltonian(lvc_file):
       for i in range(nr_entries):
         ref_hamiltonian[current_keyword][i] = lvc_data[line_nr+1+i]#the +1 accounts for the line below the keyword
       line_nr += nr_entries+1
+      continue
 
 
     if any( keyword in lvc_data[line_nr].upper() for keyword in keywordlist_matrix ):
@@ -349,6 +350,8 @@ def read_hamiltonian(lvc_file):
         ref_hamiltonian[current_keyword][i] = lvc_data[line_nr+i]
       line_nr += ref_hamiltonian['nr_states']
       continue
+    
+    line_nr += 1
 
 
   return ref_hamiltonian

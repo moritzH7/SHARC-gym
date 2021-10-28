@@ -1028,9 +1028,10 @@ from the initconds.excited files as provided by excite.py.
   INFOS['firstindex']=firstindex
 
 
-  # Number of trajectories
-  if GYM:
-    ntraj = nsetupable
+  # Number of trajectories 
+  if False: 
+    pass 
+  #  ntraj = nsetupable  #<- having different numbers of trajectories is a very bad idea
   else:
     print '\nPlease enter the total number of trajectories to setup.'
     while True:
